@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GS-Outillage — La gestion d'outillage industriel, centralisée</title>
+<meta name="description" content="GS-Outillage centralise le suivi de votre outillage industriel : outils, techniciens, commandes, sécurité — un espace par entreprise, essai gratuit de 30 jours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plate:#2B3439;
+    --plate-soft:#384048;
+    --ink:#20262B;
+    --ink-soft:#5B6670;
+    --paper:#EEF1F2;
+    --line:#D6DCE0;
+    --yellow:#F0AC1B;
+    --yellow-dark:#B57A0A;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Big Shoulders Display',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    margin:0;
+  }
+  .mono{ font-family:'JetBrains Mono',monospace; }
+  a{ color:inherit; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 24px; }
+  img,svg{ display:block; max-width:100%; }
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--plate);
+    border-bottom:1px solid #1c2226;
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand-mark{
+    width:34px; height:34px; border-radius:8px;
+    background:var(--yellow); display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .brand-mark svg{ width:18px; height:18px; }
+  .brand-name{
+    color:#fff; font-size:17px; font-weight:700; letter-spacing:0.04em;
+  }
+  .nav-cta{
+    background:var(--yellow); color:var(--plate); font-weight:700;
+    font-size:13px; letter-spacing:0.02em; text-decoration:none;
+    padding:9px 16px; border-radius:6px; white-space:nowrap;
+    transition:filter .15s ease;
+  }
+  .nav-cta:hover{ filter:brightness(0.94); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:var(--plate); color:#fff; position:relative; overflow:hidden;
+    padding:76px 0 96px;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--yellow); font-family:'JetBrains Mono',monospace;
+    font-size:12.5px; letter-spacing:0.08em; text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{ content:""; width:7px; height:7px; border-radius:1px; background:var(--yellow); transform:rotate(45deg); }
+  .hero h1{
+    font-size:clamp(38px, 5.4vw, 62px);
+    line-height:0.98;
+    font-weight:800;
+    color:#fff;
+  }
+  .hero h1 .accent{ color:var(--yellow); }
+  .hero p.lede{
+    font-family:'Inter',sans-serif; font-size:16.5px; line-height:1.6;
+    color:#B7C0C4; max-width:480px; margin:22px 0 30px;
+  }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn-primary{
+    background:var(--yellow); color:var(--plate); font-weight:700; font-size:14.5px;
+    text-decoration:none; padding:14px 24px; border-radius:8px;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:filter .15s ease, transform .15s ease;
+  }
+  .btn-primary:hover{ filter:brightness(0.95); transform:translateY(-1px); }
+  .btn-ghost{
+    border:1px solid #4A555C; color:#fff; font-weight:600; font-size:14.5px;
+    text-decoration:none; padding:14px 22px; border-radius:8px;
+  }
+  .btn-ghost:hover{ background:rgba(255,255,255,0.06); }
+
+  /* Tag stack illustration */
+  .tag-stack{ position:relative; height:340px; }
+  .tag{
+    position:absolute; width:230px;
+    background:var(--card); color:var(--ink);
+    border-radius:6px; padding:16px 16px 14px;
+    box-shadow:0 18px 34px -12px rgba(0,0,0,0.45);
+  }
+  .tag::before{
+    content:""; position:absolute; top:12px; left:12px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--paper); border:2px solid var(--line);
+  }
+  .tag .tag-label{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.06em;
+    color:var(--ink-soft); text-transform:uppercase; margin-left:22px;
+  }
+  .tag .tag-value{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:14.5px; margin-top:5px;
+  }
+  .tag .tag-sub{ font-size:12px; color:var(--ink-soft); margin-top:3px; }
+  .tag-1{ top:0; right:20px; transform:rotate(-3.5deg); z-index:3; }
+  .tag-2{ top:118px; right:96px; transform:rotate(2.5deg); z-index:2; }
+  .tag-3{ top:236px; right:8px; transform:rotate(-2deg); z-index:1; }
+  .tag-ok{ color:#1E8F5E; font-weight:700; }
+
+  @media (max-width:860px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .tag-stack{ height:260px; margin-top:10px; }
+    .tag{ width:200px; }
+    .tag-1{ right:0; top:0; }
+    .tag-2{ right:60px; top:90px; }
+    .tag-3{ right:-6px; top:180px; }
+  }
+
+  /* ---------- Problem / solution ---------- */
+  .problem{ padding:74px 0; }
+  .problem-inner{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
+  .problem h2{ font-size:30px; line-height:1.05; color:var(--ink); }
+  .problem p{ color:var(--ink-soft); font-size:15.5px; line-height:1.7; margin-top:18px; }
+  @media (max-width:760px){ .problem-inner{ grid-template-columns:1fr; } }
+
+  /* ---------- Features ---------- */
+  .features{ padding:20px 0 84px; }
+  .section-head{ max-width:560px; margin-bottom:44px; }
+  .section-head .eyebrow{ color:var(--yellow-dark); }
+  .section-head h2{ font-size:32px; color:var(--ink); }
+  .feature-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+  }
+  @media (max-width:900px){ .feature-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .feature-grid{ grid-template-columns:1fr; } }
+
+  .fcard{
+    position:relative; background:var(--card); border:1px solid var(--line);
+    border-radius:10px; padding:24px 20px 22px;
+  }
+  .fcard::before{
+    content:""; position:absolute; top:14px; left:14px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--paper); border:2px solid var(--line);
+  }
+  .fcard .f-num{
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-soft);
+    letter-spacing:0.06em; margin-left:24px;
+  }
+  .fcard h3{
+    font-size:19px; margin-top:12px; color:var(--ink); text-transform:none;
+    font-family:'Inter',sans-serif; font-weight:700; letter-spacing:0;
+  }
+  .fcard p{ color:var(--ink-soft); font-size:14px; line-height:1.6; margin-top:8px; }
+
+  /* ---------- Trial ---------- */
+  .trial{ background:var(--plate); color:#fff; padding:78px 0; }
+  .trial .section-head h2{ color:#fff; }
+  .trial .section-head p{ color:#B7C0C4; margin-top:12px; font-size:15px; max-width:520px; }
+  .timeline{
+    display:flex; gap:0; margin-top:52px; position:relative;
+  }
+  .timeline::before{
+    content:""; position:absolute; top:11px; left:0; right:0; height:2px;
+    background:#4A555C;
+  }
+  .tstep{ flex:1; position:relative; padding-right:16px; }
+  .tdot{
+    width:24px; height:24px; border-radius:50%; background:var(--yellow);
+    display:flex; align-items:center; justify-content:center; position:relative; z-index:1;
+    font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:var(--plate);
+  }
+  .tstep .t-label{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--yellow);
+    letter-spacing:0.06em; text-transform:uppercase; margin-top:18px;
+  }
+  .tstep .t-text{ font-size:14.5px; color:#D7DEE1; line-height:1.55; margin-top:8px; max-width:260px; }
+  @media (max-width:760px){
+    .timeline{ flex-direction:column; gap:28px; }
+    .timeline::before{ display:none; }
+  }
+
+  /* ---------- Final CTA / footer ---------- */
+  .final-cta{ padding:80px 0 60px; text-align:center; }
+  .final-cta h2{ font-size:34px; color:var(--ink); max-width:640px; margin:0 auto; }
+  .final-cta p{ color:var(--ink-soft); font-size:15px; margin:16px auto 30px; max-width:480px; }
+
+  footer{ background:var(--plate); color:#8E9BA1; padding:34px 0; }
+  .footer-inner{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;
+    font-size:13px;
+  }
+  .footer-inner a{ text-decoration:none; color:#B7C0C4; font-weight:600; }
+  .footer-inner a:hover{ color:#fff; }
+
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+    .reveal.in{ opacity:1; transform:translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4L21 6l-3-3-3.3 3.3z" stroke="#2B3439" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="brand-name">GS-OUTILLAGE</span>
+    </div>
+    <a class="nav-cta" href="https://projet-gs-outils.vercel.app" target="_blank" rel="noopener">Accéder à l'application</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Gestion d'outillage industriel</div>
+      <h1>Chaque outil.<br>Chaque technicien.<br><span class="accent">Un seul endroit.</span></h1>
+      <p class="lede">GS-Outillage centralise le suivi de votre outillage : références, dotations par technicien, commandes et sécurité — dans un espace propre à votre entreprise.</p>
+      <div class="cta-row">
+        <a class="btn-primary" href="https://projet-gs-outils.vercel.app" target="_blank" rel="noopener">
+          Accéder à l'application →
+        </a>
+        <a class="btn-ghost" href="#fonctionnalites">Voir les fonctionnalités</a>
+      </div>
+    </div>
+    <div class="tag-stack">
+      <div class="tag tag-1">
+        <div class="tag-label">Référence</div>
+        <div class="tag-value">Clé dynamométrique</div>
+        <div class="tag-sub">Réf. 00182 · Atelier B</div>
+      </div>
+      <div class="tag tag-2">
+        <div class="tag-label">Technicien</div>
+        <div class="tag-value">J. Amrani</div>
+        <div class="tag-sub">14 outils affectés</div>
+      </div>
+      <div class="tag tag-3">
+        <div class="tag-label">Inventaire</div>
+        <div class="tag-value tag-ok">✓ Vérifié</div>
+        <div class="tag-sub">Tournée du 24/07</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="problem">
+  <div class="wrap problem-inner">
+    <div class="reveal">
+      <h2>Un outil introuvable,<br>c'est une machine à l'arrêt.</h2>
+    </div>
+    <div class="reveal">
+      <p>Carnets, fichiers Excel, mémoire des techniciens : le suivi d'outillage repose encore souvent sur des méthodes fragiles. GS-Outillage remplace ça par un suivi en temps réel — du magasin jusqu'à l'atelier, avec un historique complet à chaque étape.</p>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="fonctionnalites">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Fonctionnalités</div>
+      <h2>Tout ce qu'un atelier de maintenance gère au quotidien</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="fcard reveal">
+        <div class="f-num">01</div>
+        <h3>Outillage</h3>
+        <p>Chaque référence suivie : quantité, marque, durée de vie et historique complet.</p>
+      </div>
+      <div class="fcard reveal">
+        <div class="f-num">02</div>
+        <h3>Techniciens</h3>
+        <p>Dotations, organigramme et historique des outils affectés par technicien.</p>
+      </div>
+      <div class="fcard reveal">
+        <div class="f-num">03</div>
+        <h3>Commandes</h3>
+        <p>Bons de commande, réceptions et sorties de stock, du même endroit.</p>
+      </div>
+      <div class="fcard reveal">
+        <div class="f-num">04</div>
+        <h3>Sécurité</h3>
+        <p>Droits par onglet, verrouillage après inactivité, tentatives de connexion limitées.</p>
+      </div>
+      <div class="fcard reveal">
+        <div class="f-num">05</div>
+        <h3>Multi-entreprise</h3>
+        <p>Chaque entreprise dans son propre espace, isolé et protégé.</p>
+      </div>
+      <div class="fcard reveal">
+        <div class="f-num">06</div>
+        <h3>Accessible partout</h3>
+        <p>Sur ordinateur comme sur mobile, sans installation ni mise à jour à gérer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trial">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Mise en route</div>
+      <h2>30 jours pour tester, sans engagement</h2>
+      <p>Accès complet, sans limitation de fonctionnalités. Besoin de plus de temps pour bien prendre l'outil en main ? Une prolongation de 30 jours peut être accordée sur demande.</p>
+    </div>
+    <div class="timeline">
+      <div class="tstep reveal">
+        <div class="tdot">1</div>
+        <div class="t-label">Jour 1</div>
+        <div class="t-text">Créez votre espace entreprise en quelques minutes, avec vérification par e-mail et SMS.</div>
+      </div>
+      <div class="tstep reveal">
+        <div class="tdot">2</div>
+        <div class="t-label">Jour 30</div>
+        <div class="t-text">Fin de l'essai gratuit. L'accès complet reste actif tant que le renouvellement n'a pas expiré.</div>
+      </div>
+      <div class="tstep reveal">
+        <div class="tdot">3</div>
+        <div class="t-label">+30 jours</div>
+        <div class="t-text">Besoin de plus de temps pour former vos équipes ? Une prolongation peut être accordée sur simple demande.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap reveal">
+    <h2>Prêt à centraliser votre outillage ?</h2>
+    <p>Créez votre espace entreprise et commencez votre essai gratuit de 30 jours.</p>
+    <a class="btn-primary" style="background:var(--yellow); color:var(--plate);" href="https://projet-gs-outils.vercel.app" target="_blank" rel="noopener">
+      Accéder à l'application →
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>GS-Outillage — gs-outils.com</span>
+    <a href="https://projet-gs-outils.vercel.app" target="_blank" rel="noopener">Accéder à l'application →</a>
+  </div>
+</footer>
+
+<script>
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    els.forEach((el) => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
