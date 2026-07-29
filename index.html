@@ -220,6 +220,44 @@
   .footer-inner a{ text-decoration:none; color:#B7C0C4; font-weight:600; }
   .footer-inner a:hover{ color:#fff; }
 
+  /* ---------- Contact / réclamation ---------- */
+  .contact{ padding:78px 0 84px; }
+  .contact-box{
+    display:grid; grid-template-columns:0.85fr 1.15fr; gap:40px;
+    background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:40px; align-items:start;
+  }
+  .contact-intro h2{ font-size:28px; color:var(--ink); }
+  .contact-intro p{ color:var(--ink-soft); font-size:14.5px; line-height:1.65; margin-top:14px; }
+  .contact-note{
+    margin-top:22px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--ink-soft);
+    border-left:2px solid var(--yellow); padding-left:12px; line-height:1.6;
+  }
+  .field{ margin-bottom:16px; }
+  .field label{
+    display:block; font-size:12.5px; font-weight:600; color:var(--ink); margin-bottom:6px;
+  }
+  .field input, .field textarea{
+    width:100%; border:1px solid var(--line); border-radius:7px; padding:11px 12px;
+    font-family:'Inter',sans-serif; font-size:14px; color:var(--ink); background:#fff;
+    resize:vertical;
+  }
+  .field input:focus, .field textarea:focus{
+    outline:2px solid var(--yellow); outline-offset:1px; border-color:var(--yellow);
+  }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:760px){ .contact-box{ grid-template-columns:1fr; padding:26px; } .field-row{ grid-template-columns:1fr; } }
+  .btn-submit{
+    background:var(--yellow); color:var(--plate); font-weight:700; font-size:14.5px;
+    border:none; border-radius:8px; padding:13px 22px; cursor:pointer;
+    transition:filter .15s ease;
+  }
+  .btn-submit:hover{ filter:brightness(0.95); }
+  .btn-submit:disabled{ opacity:0.6; cursor:not-allowed; }
+  .form-status{ margin-top:14px; font-size:13.5px; display:none; }
+  .form-status.ok{ color:#1E8F5E; display:block; }
+  .form-status.err{ color:#C0392B; display:block; }
+
   @media (prefers-reduced-motion: no-preference){
     .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
     .reveal.in{ opacity:1; transform:translateY(0); }
@@ -364,6 +402,41 @@
   </div>
 </section>
 
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <div class="contact-intro">
+        <div class="eyebrow" style="color:var(--yellow-dark);">Nous contacter</div>
+        <h2>Une question,<br>une réclamation ?</h2>
+        <p>Écrivez-nous directement depuis ce formulaire — que ce soit pour une question sur l'application, un problème rencontré, ou une réclamation. Nous répondons personnellement à chaque message.</p>
+        <div class="contact-note">Réponse sous 24 à 48h ouvrées.</div>
+      </div>
+      <form id="contactForm">
+        <div class="field-row">
+          <div class="field">
+            <label for="cf-name">Nom</label>
+            <input type="text" id="cf-name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="cf-email">E-mail</label>
+            <input type="email" id="cf-email" name="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="cf-subject">Sujet</label>
+          <input type="text" id="cf-subject" name="subject" placeholder="Ex. Réclamation, question, suggestion…" required>
+        </div>
+        <div class="field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="cf-submit">Envoyer le message</button>
+        <div class="form-status" id="cf-status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap footer-inner">
     <span>GS-Outillage — gs-outils.com</span>
@@ -381,6 +454,41 @@
   } else {
     document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
   }
+
+  const cfForm = document.getElementById('contactForm');
+  const cfSubmit = document.getElementById('cf-submit');
+  const cfStatus = document.getElementById('cf-status');
+  cfForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    cfSubmit.disabled = true;
+    cfSubmit.textContent = 'Envoi en cours…';
+    cfStatus.className = 'form-status';
+    cfStatus.textContent = '';
+    const payload = {
+      name: document.getElementById('cf-name').value.trim(),
+      email: document.getElementById('cf-email').value.trim(),
+      subject: document.getElementById('cf-subject').value.trim(),
+      message: document.getElementById('cf-message').value.trim(),
+    };
+    try {
+      const r = await fetch('/api/submit-complaint', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data.error || 'Erreur lors de l\'envoi');
+      cfStatus.className = 'form-status ok';
+      cfStatus.textContent = 'Message envoyé — merci, nous revenons vers vous rapidement.';
+      cfForm.reset();
+    } catch (err) {
+      cfStatus.className = 'form-status err';
+      cfStatus.textContent = 'Impossible d\'envoyer le message pour le moment. Réessayez dans un instant.';
+    } finally {
+      cfSubmit.disabled = false;
+      cfSubmit.textContent = 'Envoyer le message';
+    }
+  });
 </script>
 
 </body>
