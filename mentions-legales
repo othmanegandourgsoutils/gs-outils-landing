@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentions légales & Confidentialité — GS-Outillage</title>
+<meta name="description" content="Mentions légales, politique de confidentialité et conditions d'utilisation de GS-Outillage.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plate:#2B3439; --plate-soft:#384048; --ink:#20262B; --ink-soft:#5B6670;
+    --paper:#EEF1F2; --line:#D6DCE0; --yellow:#F0AC1B; --yellow-dark:#B57A0A; --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,.display{ font-family:'Big Shoulders Display',sans-serif; text-transform:uppercase; letter-spacing:0.01em; margin:0; }
+  .mono{ font-family:'JetBrains Mono',monospace; }
+  a{ color:var(--yellow-dark); }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 24px; }
+
+  header.nav{ position:sticky; top:0; z-index:50; background:var(--plate); border-bottom:1px solid #1c2226; }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; padding:14px 24px; max-width:1120px; margin:0 auto; }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand-mark{ width:34px; height:34px; border-radius:8px; background:var(--yellow); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .brand-mark svg{ width:18px; height:18px; }
+  .brand-name{ color:#fff; font-size:17px; font-weight:700; letter-spacing:0.04em; }
+  .nav-cta{ background:var(--yellow); color:var(--plate); font-weight:700; font-size:13px; text-decoration:none; padding:9px 16px; border-radius:6px; white-space:nowrap; }
+
+  .hero{ background:var(--plate); color:#fff; padding:56px 0 44px; }
+  .hero .eyebrow{ color:var(--yellow); font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px; }
+  .hero h1{ font-size:clamp(28px,4vw,42px); color:#fff; font-weight:800; }
+  .hero p{ color:#B7C0C4; font-size:14.5px; margin-top:14px; max-width:560px; }
+
+  main{ padding:48px 0 90px; }
+  section{ margin-bottom:38px; }
+  section h2{ font-size:20px; color:var(--ink); margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid var(--line); }
+  section p, section li{ font-size:14.5px; line-height:1.7; color:var(--ink-soft); }
+  section ul{ padding-left:20px; margin:10px 0; }
+  section li{ margin-bottom:6px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px 20px; }
+  .notice{ background:#FFF7E0; border:1px solid var(--yellow); border-radius:8px; padding:12px 16px; font-size:13px; color:#6B5300; margin-top:14px; }
+  .updated{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--ink-soft); }
+
+  footer{ background:var(--plate); color:#8E9BA1; padding:34px 0; }
+  .footer-inner{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; font-size:13px; max-width:1120px; margin:0 auto; padding:0 24px; }
+  .footer-inner a{ text-decoration:none; color:#B7C0C4; font-weight:600; }
+  .footer-inner a:hover{ color:#fff; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4L21 6l-3-3-3.3 3.3z" stroke="#2B3439" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="brand-name">GS-OUTILLAGE</span>
+    </a>
+    <a class="nav-cta" href="https://projet-gs-outils.vercel.app" target="_blank" rel="noopener">Accéder à l'application</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Informations légales</div>
+    <h1>Mentions légales & confidentialité</h1>
+    <p>Ce document explique qui édite GS-Outillage, quelles données sont collectées, pourquoi, et comment les faire valoir vos droits.</p>
+    <p class="updated" style="margin-top:18px;">Dernière mise à jour : août 2026</p>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <section>
+    <h2>1. Éditeur du site</h2>
+    <div class="card">
+      <p>Ce site (gs-outils.com) et l'application GS-Outillage sont édités par :</p>
+      <p><strong>Othmane Gandour</strong>, personne physique, basé à Casablanca, Maroc.</p>
+      <p>Contact : <a href="mailto:contact@gs-outils.com">contact@gs-outils.com</a></p>
+      <div class="notice">
+        GS-Outillage est actuellement exploité à titre individuel, sans structure juridique formelle enregistrée à ce jour.
+        Une structure (auto-entrepreneur ou société) pourra être mise en place à mesure que l'activité se développe.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Hébergement</h2>
+    <p>Le site et l'application sont hébergés par <strong>Vercel Inc.</strong> (États-Unis) — <a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a>.</p>
+    <p>La base de données de l'application est hébergée par <strong>Supabase</strong> — <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a>.</p>
+  </section>
+
+  <section>
+    <h2>3. Données collectées</h2>
+    <p>Selon votre usage du site et de l'application, les données suivantes peuvent être collectées :</p>
+    <ul>
+      <li>Lors de la création d'un espace entreprise : nom de l'entreprise, secteur d'activité, localisation, numéro de téléphone, adresse e-mail</li>
+      <li>Lors de la création d'un compte utilisateur dans l'application : nom, identifiant, mot de passe (stocké de façon sécurisée), rôle</li>
+      <li>Lors de l'utilisation du formulaire de contact : nom, e-mail, sujet et contenu du message</li>
+      <li>Les données métier que vous saisissez vous-même dans l'application (outillage, techniciens, commandes, etc.), propres à votre entreprise</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. Finalité du traitement</h2>
+    <p>Ces données sont utilisées uniquement pour :</p>
+    <ul>
+      <li>Créer et sécuriser votre espace entreprise (vérification par e-mail et SMS)</li>
+      <li>Vous permettre d'utiliser l'application (gestion d'outillage, techniciens, commandes…)</li>
+      <li>Répondre à vos questions ou réclamations envoyées via le formulaire de contact</li>
+      <li>Assurer la sécurité de l'application (ex. limitation des tentatives de connexion)</li>
+    </ul>
+    <p>Aucune donnée n'est vendue ni utilisée à des fins publicitaires.</p>
+  </section>
+
+  <section>
+    <h2>5. Partenaires techniques (sous-traitants)</h2>
+    <p>Pour faire fonctionner le service, certaines données transitent par des prestataires techniques tiers, chacun responsable de la sécurité de son propre service :</p>
+    <ul>
+      <li><strong>Supabase</strong> — stockage de la base de données de l'application</li>
+      <li><strong>Twilio</strong> — envoi des SMS de vérification de numéro de téléphone</li>
+      <li><strong>Resend</strong> — envoi des e-mails de confirmation</li>
+      <li><strong>Vercel</strong> — hébergement du site et de l'application</li>
+    </ul>
+    <p>Ces prestataires peuvent traiter des données en dehors du Maroc, dans le cadre strict de la prestation technique fournie.</p>
+  </section>
+
+  <section>
+    <h2>6. Durée de conservation</h2>
+    <p>Vos données sont conservées tant que votre espace entreprise reste actif. En cas de suppression d'un compte ou d'une entreprise, les données sont retirées dans un délai raisonnable, sauf obligation légale de conservation plus longue.</p>
+  </section>
+
+  <section>
+    <h2>7. Vos droits</h2>
+    <p>Conformément à la loi marocaine n° 09-08 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel, vous disposez d'un droit d'accès, de rectification et de suppression de vos données.</p>
+    <p>Pour exercer ce droit, écrivez à : <a href="mailto:contact@gs-outils.com">contact@gs-outils.com</a></p>
+  </section>
+
+  <section>
+    <h2>8. Cookies</h2>
+    <p>Ce site n'utilise pas de cookies de suivi publicitaire. L'application peut utiliser un stockage technique local strictement nécessaire à votre session de connexion.</p>
+  </section>
+
+  <section>
+    <h2>9. Évolution de ce document</h2>
+    <p>Ce document peut être mis à jour à mesure que le service évolue. La date de dernière mise à jour est indiquée en haut de cette page.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>GS-Outillage — gs-outils.com</span>
+    <a href="/">← Retour à l'accueil</a>
+  </div>
+</footer>
+
+</body>
+</html>
