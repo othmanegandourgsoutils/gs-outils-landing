@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Méthode non autorisée" });
   }
 
-  const { code, extra } = req.body || {};
+  const { code, extra, joinOnly } = req.body || {};
   if (!code || typeof code !== "string") {
     return res.status(400).json({ error: "Code entreprise manquant" });
   }
@@ -45,6 +45,11 @@ export default async function handler(req, res) {
     const now = new Date().toISOString();
     const idx = list.findIndex((c) => c.code === code);
     let generatedPassword = null;
+
+    if (idx < 0 && joinOnly) {
+      // Tentative de rejoindre un espace avec un code qui n'existe pas : on ne crée rien.
+      return res.status(404).json({ error: "Code entreprise introuvable. Vérifiez le code saisi." });
+    }
 
     if (idx < 0) {
       // Nouvelle entreprise : téléphone et e-mail doivent être uniques dans la liste globale.
