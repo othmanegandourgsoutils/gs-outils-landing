@@ -51,10 +51,7 @@
       }
       .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
       .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
-      .brand .tag {
-        font-family: var(--font-mono); font-size: 0.62rem; color: var(--plate);
-        background: var(--amber); padding: 2px 6px; border-radius: 3px; letter-spacing: 0.04em;
-      }
+      .brand-logo { flex-shrink: 0; }
       .nav-links { display: flex; gap: 28px; font-size: 0.92rem; color: var(--paper-dim); }
       .nav-links a:hover { color: var(--paper); }
       .nav-cta {
@@ -195,7 +192,14 @@
   <body>
     <header class="site">
       <nav class="nav wrap">
-        <div class="brand">GS-OUTILLAGE <span class="tag">GMAO</span></div>
+        <div class="brand">
+          <svg class="brand-logo" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="28" height="28" rx="7" fill="var(--amber)"/>
+            <path d="M9 19L15.5 12.5M15.5 12.5C14.7 11.7 14.7 10.4 15.5 9.6L18.1 7C18.5 7.9 19.1 8.7 19.9 9.4C20.6 10.1 21.4 10.6 22.2 11L19.6 13.6C18.8 14.4 17.5 14.4 16.7 13.6" stroke="#20262B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="19" r="2" stroke="#20262B" stroke-width="1.8"/>
+          </svg>
+          GS-OUTILLAGE
+        </div>
         <div class="nav-links">
           <a href="#fonctionnalites">Fonctionnalités</a>
           <a href="#tarifs">Tarifs</a>
