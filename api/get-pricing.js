@@ -1,7 +1,7 @@
 // Renvoie les prix actuels (mensuel / annuel) pour affichage public sur la landing page.
 // Lecture seule, aucune authentification requise — ce sont des informations tarifaires publiques.
-// Utilise la clé secrète "service_role" côté serveur pour lire la table, jamais exposée au navigateur.
-import { createClient } from "@supabase/supabase-js";
+// Utilise la clé secrète "service_role" côté serveur via une requête REST directe (pas de
+// librairie externe requise, comme submit-complaint.js dans ce même dossier).
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
@@ -15,20 +15,24 @@ export default async function handler(req, res) {
   }
 
   try {
-    const admin = createClient(supabaseUrl, serviceRoleKey);
+    const keys = "(outillage:global:pricePerMonth,outillage:global:priceAnnual)";
+    const url = `${supabaseUrl}/rest/v1/app_storage?select=key,value&shared=eq.true&key=in.${keys}`;
 
-    const { data: rows, error } = await admin
-      .from("app_storage")
-      .select("key, value")
-      .eq("shared", true)
-      .in("key", ["outillage:global:pricePerMonth", "outillage:global:priceAnnual"]);
+    const r = await fetch(url, {
+      headers: {
+        apikey: serviceRoleKey,
+        Authorization: `Bearer ${serviceRoleKey}`,
+      },
+    });
 
-    if (error) {
-      return res.status(500).json({ error: error.message });
+    if (!r.ok) {
+      const errText = await r.text().catch(() => "");
+      return res.status(500).json({ error: `Erreur de lecture (${r.status}) : ${errText}` });
     }
 
-    const monthlyRow = rows?.find((r) => r.key === "outillage:global:pricePerMonth");
-    const annualRow = rows?.find((r) => r.key === "outillage:global:priceAnnual");
+    const rows = await r.json();
+    const monthlyRow = rows?.find((row) => row.key === "outillage:global:pricePerMonth");
+    const annualRow = rows?.find((row) => row.key === "outillage:global:priceAnnual");
 
     const pricePerMonth = Number(monthlyRow?.value) || 2000;
     const priceAnnual = Number(annualRow?.value) || 24000;
